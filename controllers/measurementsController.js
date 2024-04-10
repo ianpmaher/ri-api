@@ -12,19 +12,24 @@ function calculateLengthComparison(req, res) {
         return;
     }
     const rhodeIslandData = getRhodeIslandData();
-    const rhodeIslandComparison = calculateRhodeIslandLengthComparison(length, rhodeIslandData);
+    const rhodeIslandComparison = calculateRILengthComparison(length, rhodeIslandData);
     res.json({
+        "Rhode Island Perimeter": "170 miles", // Rhode Island perimeter in miles
+        length: length,
+        kilometers: length * 1.60934,
+        miles: length / 1.60934,
         comparison: rhodeIslandComparison,
     });
 }
 // === length === //
 // function to calculate comparison of length with Rhode Island perimeter
-function calculateRhodeIslandLengthComparison(length, rhodeIslandData) {
+function calculateRILengthComparison(length, rhodeIslandData) {
     const rhodeIslandLength = rhodeIslandData.length;
     const rhodeIslandWidth = rhodeIslandData.width;
     const rhodeIslandPerimeter = 2 * (rhodeIslandLength + rhodeIslandWidth); // Perimeter = 2 * (length + width)
-    const comparison = length / rhodeIslandPerimeter;
-    return comparison;
+    const comparison = (length / rhodeIslandPerimeter).toFixed(5);
+    // return comparison;
+    return `The length is ${comparison} times the perimeter of Rhode Island`;
 }
 
 // === area === //
@@ -38,6 +43,7 @@ function calculateAreaComparison(req, res) {
     }
     const rhodeIslandData = getRhodeIslandData();
     const rhodeIslandComparison = calculateRIAreaComparison(area, rhodeIslandData);
+    // return json response with data and comparison
     res.json({
         "Rhode Island Area": "1545 sq. miles", // Rhode Island area in square miles
         area: area,
@@ -49,8 +55,9 @@ function calculateAreaComparison(req, res) {
 
 function calculateRIAreaComparison(area, rhodeIslandData) {
     const rhodeIslandArea = rhodeIslandData.area;
-    const comparison = area / rhodeIslandArea;
-    return comparison;
+    const comparison = (area / rhodeIslandArea).toFixed(5);
+    // return comparison;
+    return `The area is ${comparison} times the area of Rhode Island`;
 }
 
 module.exports = {
