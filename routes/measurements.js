@@ -1,5 +1,6 @@
 const express = require("express");
 const router = express.Router();
+const { getRhodeIslandData } = require("../rhodeIslandData");
 
 router.get("/length", (req, res) => {
     const inputLength = req.query.length;
@@ -8,7 +9,8 @@ router.get("/length", (req, res) => {
         res.status(400).send("Invalid length");
         return;
     }
-    const rhodeIslandComparison = calculateRhodeIslandComparison(length);
+    const rhodeIslandData = getRhodeIslandData();
+    const rhodeIslandComparison = calculateRhodeIslandComparison(length, rhodeIslandData);
     res.json({
         comparison: rhodeIslandComparison
     });
