@@ -3,6 +3,7 @@ const cookieParser = require("cookie-parser");
 const cors = require("cors");
 const path = require("path"); 
 const measurementsRouter = require("./routes/measurementsRouter") // import router
+const factsRouter = require("./routes/factsRouter"); // import facts router
 const app = express();
 const port = 3333;
 
@@ -15,7 +16,9 @@ app.use(express.static("public"));
 
 // ROUTES
 
+// example usage: http://localhost:3333/measure/length?length=100 // example usage: http://localhost:3333/measure/area?area=100 // example usage: http://localhost:3333/facts
 app.use("/measure", measurementsRouter); // use router for /measure as middleware
+app.use("/facts", factsRouter); // use facts router as middleware
 
 app.get("/hello", (req, res, next) => {
     res.send("Hello World!");
