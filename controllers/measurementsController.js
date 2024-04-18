@@ -17,7 +17,7 @@ function calculateLengthComparison(req, res) {
         "Rhode Island Length": "48 miles", // Rhode Island length in miles
         length: length,
         kilometers: length * 1.60934,
-        miles: length / 1.60934,
+        miles: `${length} miles`,
         comparison: rhodeIslandComparison,
     });
 }
@@ -35,7 +35,7 @@ function calculateRILengthComparison(length, rhodeIslandData) {
 // === area === //
 // function to calculate comparison of area with Rhode Island area
 function calculateAreaComparison(req, res) {
-    const inputArea = req.query.area; // Get the area from the query parameters
+    const inputArea = req.query.area; // Get the area from the query parameters units
     const area = parseFloat(inputArea);
     if (isNaN(area)) {
         res.status(400).send("Invalid area");
@@ -46,9 +46,9 @@ function calculateAreaComparison(req, res) {
     // return json response with data and comparison
     res.json({
         "Rhode Island Area": "1545 sq. miles", // Rhode Island area in square miles
-        area: area,
+        area: `${area} sq. miles`,
         squareKilometers: (area * 2.58999).toFixed(2),
-        squareMiles: (area / 2.58999).toFixed(2),
+        // squareMiles: (area / 2.58999).toFixed(2),
         comparison: rhodeIslandComparison,
     });
 }
