@@ -1,6 +1,8 @@
 # RI API 
 Rhode Island as a Unit of Measurement | Measure any quantity in terms of Rhode Island. 
 
+![Rhode Island Logo](public/newportbridge.webp)
+
 ## API Endpoints
 
 Below is a table describing the functionality provided by each API endpoint when accessed via GET requests.
@@ -9,7 +11,7 @@ Below is a table describing the functionality provided by each API endpoint when
 | ---------------- | ----------------------------------------- | -------------------------------- |
 | `measure/length` | Converts lengths between different units. | `/measure/length?from=feet&to=meters&value=10` |
 | `measure/area`   | Converts areas between different units.   | `/measure/area?from=square_km&to=square_mile&value=5` |
-| `./facts`        | Provides random facts.                    | `./facts?type=science`          |
+| `/facts`         | Provides random facts.                    | `/facts?type=science`          |
 
 ### Endpoint Details
 
@@ -33,6 +35,8 @@ If you have any feedback or issues, please open an issue in this repository, and
 Thank you for using our API!
 
 # Functional deployment: 
+
+[https://radiant-wildwood-30276-73f4e705b27f.herokuapp.com/](https://radiant-wildwood-30276-73f4e705b27f.herokuapp.com/)
 
 
 # Details: 
