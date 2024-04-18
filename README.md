@@ -1,6 +1,36 @@
 # RI API 
 Rhode Island as a Unit of Measurement | Measure any quantity in terms of Rhode Island. 
 
+## API Endpoints
+
+Below is a table describing the functionality provided by each API endpoint when accessed via GET requests.
+
+| Endpoint         | Functionality                             | Example Request                  | 
+| ---------------- | ----------------------------------------- | -------------------------------- |
+| `measure/length` | Converts lengths between different units. | `/measure/length?from=feet&to=meters&value=10` |
+| `measure/area`   | Converts areas between different units.   | `/measure/area?from=square_km&to=square_mile&value=5` |
+| `./facts`        | Provides random facts.                    | `./facts?type=science`          |
+
+### Endpoint Details
+
+#### 1. `measure/length`
+This endpoint allows users to convert lengths from one unit to another. Supported units include meters, kilometers, feet, and miles. Users must specify `from`, `to`, and `value` parameters in the query.
+
+#### 2. `measure/area`
+This endpoint enables users to convert areas between different measurement units like square meters, square kilometers, acres, and square miles. The `from`, `to`, and `value` parameters need to be provided in the query.
+
+#### 3. `./facts`
+The facts endpoint provides random facts based on the specified type. Possible types include 'science', 'history', and 'math'. The `type` parameter can be included in the query to specify the category of fact desired.
+
+## Usage
+
+To use these endpoints, make a GET request to the appropriate URL with the necessary query parameters as shown in the examples.
+
+## Feedback
+
+If you have any feedback or issues, please open an issue in this repository, and we will address it as soon as possible.
+
+Thank you for using our API!
 
 # Functional deployment: 
 
