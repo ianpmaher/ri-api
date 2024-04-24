@@ -33,14 +33,40 @@ function calculateRILengthComparison(length, rhodeIslandData) {
 }
 
 // === area === //
+
+// convert units
+function convertToSquareMiles(area, units) {
+    switch (units) {
+        case "sqkm":
+            // convert square kilometers to square miles
+            return area / 2.58999.toFixed(2);
+        case "sqft":
+            // convert square feet to square miles
+            return area / 27878400;
+        case "sqm":
+            // convert square meters to square miles
+            return area / 2589988.1103;
+        // add more cases as needed
+        default:
+            // if the units are not recognized, assume the area is already in square miles
+            return area;
+    }
+}
+
 // function to calculate comparison of area with Rhode Island area
 function calculateAreaComparison(req, res) {
     const inputArea = req.query.area; // Get the area from the query parameters units
-    const area = parseFloat(inputArea);
+    const units = req.query.units; // Get the units from the query parameters
+
+    let area = parseFloat(inputArea);
     if (isNaN(area)) {
         res.status(400).send("Invalid area");
         return;
     }
+
+    // convert the area to square miles
+    area = convertToSquareMiles(area, units);
+
     const rhodeIslandData = getRhodeIslandData();
     const rhodeIslandComparison = calculateRIAreaComparison(area, rhodeIslandData);
     // return json response with data and comparison
@@ -50,6 +76,7 @@ function calculateAreaComparison(req, res) {
         squareKilometers: (area * 2.58999).toFixed(2),
         // squareMiles: (area / 2.58999).toFixed(2),
         comparison: rhodeIslandComparison,
+        units: req.query.units,
     });
 }
 
@@ -109,7 +136,9 @@ function calculateRIPopulationDensityComparison(populationDensity, rhodeIslandDa
     const rhodeIslandPopulationDensity = rhodeIslandData.popDensity;
     const comparison = (populationDensity / rhodeIslandPopulationDensity).toFixed(3);
     // return comparison;
-    return `The population density is ${comparison} times the population density of Rhode Island, or ${comparison * 100}%.`;
+    return `The population density is ${comparison} times the population density of Rhode Island, or ${
+        comparison * 100
+    }%.`;
 }
 
 // highest point comparison
@@ -139,7 +168,6 @@ function calculateRIHighestPointComparison(highestPoint, rhodeIslandData) {
     // return comparison;
     return `The input height is ${comparison} times the highest point of Rhode Island, or ${comparison * 100}%.`;
 }
-
 
 // compare shoreline length
 function calculateShorelineComparison(req, res) {
@@ -190,10 +218,10 @@ function calculateRIWaterToLandRatioComparison(waterToLandRatio, rhodeIslandData
     const rhodeIslandWaterToLandRatio = rhodeIslandData.waterToLandRatio;
     const comparison = (waterToLandRatio / rhodeIslandWaterToLandRatio).toFixed(3);
     // return comparison;
-    return `The water-to-land ratio is ${comparison} times the water-to-land ratio of Rhode Island, or ${comparison * 100}%.`;
+    return `The water-to-land ratio is ${comparison} times the water-to-land ratio of Rhode Island, or ${
+        comparison * 100
+    }%.`;
 }
-
-
 
 module.exports = {
     calculateLengthComparison,
