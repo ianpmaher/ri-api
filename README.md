@@ -10,7 +10,12 @@ Below is a table describing the functionality provided by each API endpoint when
 | Endpoint         | Functionality                             | Example Request                  | 
 | ---------------- | ----------------------------------------- | -------------------------------- |
 | `measure/length` | Converts lengths between different units. | `/measure/length?from=feet&to=meters&value=10` |
-| `measure/area`   | Converts areas between different units.   | `/measure/area?from=square_km&to=square_mile&value=5` |
+| `measure/area`   | Converts areas between different units.   | `/measure/area?area=303&units=sqmi` |
+| `measure/population`   | Converts areas between different units.   | `/measure/population?population=500000` |
+| `measure/population-density`   | Converts areas between different units.   | `/measure/population-density?density=300` |
+| `measure/highest-point`   | Converts areas between different units.   | `/measure/highest-point?height=3000` |
+| `measure/shoreline`   | Converts areas between different units.   | `/measure/shoreline?shoreline=900` |
+| `measure/highest-point`   | Converts areas between different units.   | `/measure/area?from=square_km&to=square_mile&value=5` |
 | `/facts`         | Provides random facts.                    | `/facts?type=science`          |
 
 ### Endpoint Details

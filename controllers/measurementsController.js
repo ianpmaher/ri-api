@@ -26,10 +26,11 @@ function calculateLengthComparison(req, res) {
 function calculateRILengthComparison(length, rhodeIslandData) {
     const rhodeIslandLength = rhodeIslandData.length;
     const rhodeIslandWidth = rhodeIslandData.width;
-    const rhodeIslandPerimeter = 2 * (rhodeIslandLength + rhodeIslandWidth); // Perimeter = 2 * (length + width)
-    const comparison = (length / rhodeIslandPerimeter).toFixed(4);
+    // const rhodeIslandPerimeter = 2 * (rhodeIslandLength + rhodeIslandWidth); // Perimeter = 2 * (length + width)
+    // const comparisonPerimeter = (length / rhodeIslandPerimeter).toFixed(4);
+    const comparisonLength = (length / rhodeIslandLength).toFixed(4);
     // return comparison;
-    return `The length is ${comparison} times the perimeter of Rhode Island, or ${comparison * 100}%.`;
+    return `The length is ${comparisonLength} times the perimeter of Rhode Island, or ${comparisonLength * 100}%.`;
 }
 
 // === area === //
@@ -39,7 +40,7 @@ function convertToSquareMiles(area, units) {
     switch (units) {
         case "sqkm":
             // convert square kilometers to square miles
-            return area / 2.58999.toFixed(2);
+            return area / (2.58999).toFixed(2);
         case "sqft":
             // convert square feet to square miles
             return area / 27878400;
@@ -135,10 +136,9 @@ function calculatePopulationDensityComparison(req, res) {
 function calculateRIPopulationDensityComparison(populationDensity, rhodeIslandData) {
     const rhodeIslandPopulationDensity = rhodeIslandData.popDensity;
     const comparison = (populationDensity / rhodeIslandPopulationDensity).toFixed(3);
+    const percentage = Math.floor(comparison * 100);
     // return comparison;
-    return `The population density is ${comparison} times the population density of Rhode Island, or ${
-        comparison * 100
-    }%.`;
+    return `The population density is ${comparison} times the population density of Rhode Island, or ${percentage}%.`;
 }
 
 // highest point comparison
