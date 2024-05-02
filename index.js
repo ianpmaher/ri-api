@@ -4,6 +4,7 @@ const cors = require("cors");
 const path = require("path"); 
 const measurementsRouter = require("./routes/measurementsRouter") // import router
 const factsRouter = require("./routes/factsRouter"); // import facts router
+const mediaRouter = require("./routes/mediaRouter");
 const app = express();
 require("dotenv").config();
 
@@ -21,6 +22,7 @@ app.use(express.static("public"));
 // example usage: http://localhost:3333/measure/length?length=100 // example usage: http://localhost:3333/measure/area?area=100 // example usage: http://localhost:3333/facts
 app.use("/measure", measurementsRouter); // use router for /measure as middleware
 app.use("/facts", factsRouter); // use facts router as middleware
+app.use("/media", mediaRouter);
 
 app.get("/hello", (req, res, next) => {
     res.send("Hello World!");
