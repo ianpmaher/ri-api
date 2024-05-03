@@ -73,14 +73,26 @@ function shuffleArray(array) {
 // Example usage
 // fetchImages("Rhode Island");
 
-const getRandomImages = (req, res) => {
+async function getRandomImages (req, res)  {
+    const title = req.query.title || "Rhode Island";
+    fetchImages(title)
+        .then((imageUrls) => {
+            console.log(imageUrls);
+            res.send({ imageUrls });
+        })
+        .catch((error) => {
+            console.error("Error fetching images:", error);
+            res.status(500).json({ error: "Error fetching images" });
+        });
+};
+
+    // const images = fetchImages("Rhode Island");
     // res.json( images );
     // const rhodeIslandData = getRhodeIslandData();
     // const facts = rhodeIslandData.facts;
     // const randomIndex = getRandomFactIndex();
     // const randomFact = facts[randomIndex];
     // res.json({ fact: randomFact });
-};
 
 module.exports = {
     getRandomImages,
