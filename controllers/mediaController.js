@@ -77,7 +77,7 @@ async function getRandomImages (req, res)  {
     const title = req.query.title || "Rhode Island";
     fetchImages(title)
         .then((imageUrls) => {
-            console.log(imageUrls);
+            // console.log(imageUrls);
             res.send({ imageUrls });
         })
         .catch((error) => {
