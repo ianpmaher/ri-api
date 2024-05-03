@@ -1,0 +1,20 @@
+/* CSS for making the image responsive */
+body {
+    margin: 0 auto;
+    padding: 0 auto;
+    background-color: #f1f1f1;
+    font-family: Arial, sans-serif;
+}
+
+img {
+    width: 50%;
+    height: 50%;
+}
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    max-height: 80vh;
+    max-width: 80vw;
+    margin: 0 auto;
+}
