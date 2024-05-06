@@ -42,7 +42,7 @@ async function fetchImages(title) {
         data = await response.json();
         pages = data.query.pages;
 
-        const imageUrls = [];
+        const src = [];
 
         // Print the URLs
         for (let pageId in pages) {
@@ -50,12 +50,12 @@ async function fetchImages(title) {
             if (page.imageinfo) {
                 // send image urls to client
                 const pageImageUrls = page.imageinfo.map((info) => info.url);
-                imageUrls.push(...pageImageUrls);
+                src.push(...pageImageUrls);
                 // return imageUrls;
                 // res.json({ imageUrls });
             }
         }
-        return imageUrls;
+        return src;
     }
     return [];
 }
@@ -73,27 +73,42 @@ function shuffleArray(array) {
 // Example usage
 // fetchImages("Rhode Island");
 
-async function getRandomImages (req, res)  {
+async function getRandomImages(req, res) {
     const title = req.query.title || "Rhode Island";
     fetchImages(title)
-        .then((imageUrls) => {
+        .then((src) => {
             // console.log(imageUrls);
-            res.send({ imageUrls });
+            res.send({ src });
         })
         .catch((error) => {
             console.error("Error fetching images:", error);
             res.status(500).json({ error: "Error fetching images" });
         });
-};
+}
 
-    // const images = fetchImages("Rhode Island");
-    // res.json( images );
-    // const rhodeIslandData = getRhodeIslandData();
-    // const facts = rhodeIslandData.facts;
-    // const randomIndex = getRandomFactIndex();
-    // const randomFact = facts[randomIndex];
-    // res.json({ fact: randomFact });
+// Function to fetch and return only one image
+async function getSingleRandomImage(req, res, title) {
+    const src = await fetchImages(title);
+    if (src.length > 0) {
+        const randomIndex = Math.floor(Math.random() * src.length);
+        const randomImageUrl = src[randomIndex];
+        res.send( {randomImageUrl} );
+    } else {
+        res.send( { error: "No images found" } );
+    }
+
+}
+
+
+// const images = fetchImages("Rhode Island");
+// res.json( images );
+// const rhodeIslandData = getRhodeIslandData();
+// const facts = rhodeIslandData.facts;
+// const randomIndex = getRandomFactIndex();
+// const randomFact = facts[randomIndex];
+// res.json({ fact: randomFact });
 
 module.exports = {
     getRandomImages,
+    getSingleRandomImage,
 };

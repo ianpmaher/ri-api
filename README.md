@@ -17,6 +17,7 @@ Below is a table describing the functionality provided by each API endpoint when
 | `measure/shoreline`   | Converts areas between different units.   | `/measure/shoreline?shoreline=900` |
 | `measure/highest-point`   | Converts areas between different units.   | `/measure/area?from=square_km&to=square_mile&value=5` |
 | `/facts`         | Provides random facts.                    | `/facts?type=science`          |
+| `/media/`         | Provides random facts.                    | `/facts?type=science`          |
 
 ### Endpoint Details
 
@@ -51,7 +52,9 @@ Thank you for using our API!
 * [https://en.wikipedia.org/wiki/List_of_unusual_units_of_measurement#Area](https://en.wikipedia.org/wiki/List_of_unusual_units_of_measurement#Area)
 
 # Technologies used:
-* Node, Express, 
+* Node 
+* Express
+* 
 
 Room for Improvement: 
 * Rewrite with TypeScript
