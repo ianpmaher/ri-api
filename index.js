@@ -5,6 +5,7 @@ const path = require("path");
 const measurementsRouter = require("./routes/measurementsRouter") // import router
 const factsRouter = require("./routes/factsRouter"); // import facts router
 const mediaRouter = require("./routes/mediaRouter");
+const yelpRouter = require("./routes/yelpRouter");
 const app = express();
 require("dotenv").config();
 
@@ -23,6 +24,7 @@ app.use(express.static("public"));
 app.use("/measure", measurementsRouter); // use router for /measure as middleware
 app.use("/facts", factsRouter); // use facts router as middleware
 app.use("/media", mediaRouter);
+app.use("/yelp", yelpRouter);
 
 app.get("/hello", (req, res, next) => {
     res.send("Hello World!");
