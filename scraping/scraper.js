@@ -26,11 +26,17 @@ async function scrapeRestaurants(url) {
             });
 
             // Check if there is a next page
-            // const nextPageButton = $("div.pager ul li a").has('data-query-link');
-            // console.log(document.querySelector('a[data-query-link][href*="skip"]'));
-            const nextButton = await page.$('a[data-query-link][href*="skip"]');
+            const nextButton = await page.$('a[data-gtm-vars*="listings_custom_listing_list_pager_nxt"]');
+            
             if (nextButton) {
-                console.log("Next page exists");
+                const text = await page.evaluate(button => button.textContent, nextButton);
+                console.log("Next button text:", text);
+                // const gtmVarsObj = JSON.parse(gtmVars);
+                // const key = Object.keys(gtmVarsObj)['eventLabel']; // Select the first key from the object
+                // console.log("Key:", key);
+                // Use the key as needed
+            }
+            if (nextButton) {
                 await page.evaluate(button => button.click(), nextButton);
                 count++;
                 console.log("Next page clicked");
@@ -38,7 +44,7 @@ async function scrapeRestaurants(url) {
 
                 console.log("Next page loaded");
                 // wait for content to have changed 
-                await page.waitForSelector('div.shared-item div.contents h2 a', { visible: true, timeout: 30000 }); // wait for the content to load
+                await page.waitForSelector('div.shared-item div.contents h2 a', { visible: true, timeout: 5000 }); // wait for the content to load
             
                 // await Promise.all([page.waitForNavigation({ waitUntil: "networkidle2" }), nextButton.click()]);
                 // await page.goto(nextPage, { waitUntil: "networkidle2" });
@@ -64,6 +70,7 @@ const url = "https://www.visitrhodeisland.com/food-drink/restaurants/";
 // trim the restaurant array , remove duplicates and write to a file
 const fs = require("fs");
 const path = require("path");
+const { text } = require("body-parser");
 const filePath = path.join(__dirname, "restaurants.json");
 const restaurants = scrapeRestaurants(url).then((restaurants) => {
     const uniqueRestaurants = restaurants.filter((restaurant, index, self) =>
