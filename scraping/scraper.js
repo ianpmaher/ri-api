@@ -12,8 +12,8 @@ async function scrapeRestaurants(url) {
     try {
         let hasNextPage = true; // assume there is a next page
         let count = 0;
-        while (hasNextPage && count < 80) {
-        // while (hasNextPage) {
+        // while (hasNextPage && count < 80) {
+        while (hasNextPage) {
             const content = await page.content();
             const $ = cheerio.load(content);
 
@@ -27,28 +27,24 @@ async function scrapeRestaurants(url) {
 
             // Check if there is a next page
             const nextButton = await page.$('a[data-gtm-vars*="listings_custom_listing_list_pager_nxt"]');
-            
+            // const text = await page.evaluate(button => button.textContent, nextButton);
+            // const gtmVarsObj = JSON.parse(gtmVars);
+            // const key = Object.keys(gtmVarsObj)['eventLabel']; // Select the first key from the object
+            // console.log("Key:", key);
+            // Use the key as needed
             if (nextButton) {
-                const text = await page.evaluate(button => button.textContent, nextButton);
-                console.log("Next button text:", text);
-                // const gtmVarsObj = JSON.parse(gtmVars);
-                // const key = Object.keys(gtmVarsObj)['eventLabel']; // Select the first key from the object
-                // console.log("Key:", key);
-                // Use the key as needed
-            }
-            if (nextButton) {
-                await page.evaluate(button => button.click(), nextButton);
-                count++;
+                await page.evaluate((button) => button.click(), nextButton);
                 console.log("Next page clicked");
                 // await page.waitForNavigation({ waitUntil: "networkidle2" });
-
+                // wait for content to have changed
+                await page.waitForSelector("div.shared-item div.contents h2 a", { visible: true, timeout: 5000 }); // wait for the content to load
                 console.log("Next page loaded");
-                // wait for content to have changed 
-                await page.waitForSelector('div.shared-item div.contents h2 a', { visible: true, timeout: 5000 }); // wait for the content to load
-            
-                // await Promise.all([page.waitForNavigation({ waitUntil: "networkidle2" }), nextButton.click()]);
-                // await page.goto(nextPage, { waitUntil: "networkidle2" });
             } else {
+                hasNextPage = false;
+            }
+
+            // check if we have reached 1000 restaurants
+            if (restaurants.length >= 1000) {
                 hasNextPage = false;
             }
         }
@@ -73,13 +69,10 @@ const path = require("path");
 const { text } = require("body-parser");
 const filePath = path.join(__dirname, "restaurants.json");
 const restaurants = scrapeRestaurants(url).then((restaurants) => {
-    const uniqueRestaurants = restaurants.filter((restaurant, index, self) =>
-        index === self.findIndex((r) => (
-            r.name === restaurant.name && r.link === restaurant.link
-        ))
+    const uniqueRestaurants = restaurants.filter(
+        (restaurant, index, self) =>
+            index === self.findIndex((r) => r.name === restaurant.name && r.link === restaurant.link)
     );
-    fs.writeFileSync
-
-    (filePath, JSON.stringify(uniqueRestaurants, null, 2));
+    fs.writeFileSync(filePath, JSON.stringify(uniqueRestaurants, null, 2));
     console.log("File written successfully");
 });
