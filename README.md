@@ -17,7 +17,9 @@ Below is a table describing the functionality provided by each API endpoint when
 | `measure/shoreline`   | Converts areas between different units.   | `/measure/shoreline?shoreline=900` |
 | `measure/highest-point`   | Converts areas between different units.   | `/measure/area?from=square_km&to=square_mile&value=5` |
 | `/facts`         | Provides random facts.                    | `/facts?type=science`          |
-| `/media/`         | Provides random facts.                    | `/facts?type=science`          |
+| `/media/`         | Provides random image srcs.                    | `/media`          |
+| `/restaurants/`         | Get one random Rhode Island restaurant.                    | `/restaurants`          |
+| `/restaurants/all`         | FULL list of Rhode Island restaurants.                    | `/restaurants/all`          |
 
 ### Endpoint Details
 
