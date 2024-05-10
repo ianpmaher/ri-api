@@ -44,7 +44,7 @@ async function scrapeRestaurants(url) {
             }
 
             // check if we have reached 1000 restaurants
-            if (restaurants.length >= 1000) {
+            if (restaurants.length >= 1300) {
                 hasNextPage = false;
             }
         }
