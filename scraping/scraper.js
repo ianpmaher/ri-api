@@ -21,8 +21,18 @@ async function scrapeRestaurants(url) {
             $("div.shared-item div.contents h2 a").each((index, element) => {
                 const name = $(element).text().trim(); // get the text
                 const link = $(element).attr("href"); // get the href attribute
+                $("div.shared-item div.contents p.address a").each((index, element) => {
+                    const address = $(element).text().trim();
+                    // console.log("Address:", address);
+                    restaurants.push({ name, link, address });
+
+                });
+                // $("div.shared-item div.contents p.region").each((index, element) => {
+                //     const region = $(element).text().trim();
+                //     // console.log("Region:", region);
+                // });
                 // Add the restaurant to the list
-                restaurants.push({ name, link });
+                // restaurants.push({ name, link, address });
             });
 
             // Check if there is a next page
