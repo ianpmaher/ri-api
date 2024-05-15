@@ -32,6 +32,12 @@ This endpoint enables users to convert areas between different measurement units
 #### 3. `./facts`
 The facts endpoint provides random facts based on the specified type. Possible types include 'science', 'history', and 'math'. The `type` parameter can be included in the query to specify the category of fact desired.
 
+#### 4. `./media`
+The media endpoint provides WikiMedia photo URLs based on the search term "Rhode Island". Fetching from WikiMedia each time, not hosted locally.
+
+#### 5. `./restaurants`
+This endpoint provides a list of restaurants based in Rhode Island. I will add more structure and queries in the future to allow localization. The list is a json file I had scraped using cheerio/puppeteer function found in this repo. The original list from which I scraped is on visitrhodeisland.com .
+
 ## Usage
 
 To use these endpoints, make a GET request to the appropriate URL with the necessary query parameters as shown in the examples.

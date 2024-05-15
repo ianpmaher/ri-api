@@ -14,8 +14,8 @@ const getRandomIndex = () => {
 
 const getRandomRestaurant = (req, res) => {
     const randomIndex = getRandomIndex();
-    const randomFact = restaurantsList[randomIndex];
-    res.json({ fact: randomFact });
+    const randomRest = restaurantsList[randomIndex];
+    res.json({ restaurant: randomRest });
 }
 
 module.exports = {
