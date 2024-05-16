@@ -3,7 +3,7 @@ const cheerio = require("cheerio");
 const yelp = require("./yelp");
 
 async function scrapeRestaurants(url) {
-    const browser = await puppeteer.launch();
+    const browser = await puppeteer.launch({ headless: false });
     const page = await browser.newPage();
     await page.goto(url, { waitUntil: "networkidle2" });
 
@@ -11,7 +11,6 @@ async function scrapeRestaurants(url) {
 
     try {
         let hasNextPage = true; // assume there is a next page
-        let count = 0;
         // while (hasNextPage && count < 80) {
         while (hasNextPage) {
             const content = await page.content();
@@ -21,12 +20,12 @@ async function scrapeRestaurants(url) {
             $("div.shared-item div.contents h2 a").each((index, element) => {
                 const name = $(element).text().trim(); // get the text
                 const link = $(element).attr("href"); // get the href attribute
-                $("div.shared-item div.contents p.address a").each((index, element) => {
-                    const address = $(element).text().trim();
-                    // console.log("Address:", address);
-                    restaurants.push({ name, link, address });
-
-                });
+                restaurants.push({ name, link });
+                // $("div.shared-item div.contents p.address a").each((index, element) => {
+                //     const address = $(element).text().trim();
+                //     // console.log("Address:", address);
+                    
+                // });
                 // $("div.shared-item div.contents p.region").each((index, element) => {
                 //     const region = $(element).text().trim();
                 //     // console.log("Region:", region);
@@ -37,29 +36,31 @@ async function scrapeRestaurants(url) {
 
             // Check if there is a next page
             const nextButton = await page.$('a[data-gtm-vars*="listings_custom_listing_list_pager_nxt"]');
-            // const text = await page.evaluate(button => button.textContent, nextButton);
-            // const gtmVarsObj = JSON.parse(gtmVars);
-            // const key = Object.keys(gtmVarsObj)['eventLabel']; // Select the first key from the object
-            // console.log("Key:", key);
-            // Use the key as needed
+            
             if (nextButton) {
                 await page.evaluate((button) => button.click(), nextButton);
                 console.log("Next page clicked");
+                try {
+                    // wait for content to have changed
+                    await page.waitForSelector("div.shared-item div.contents h2 a", { visible: true, timeout: 5000 }); // wait for the content to load
+                    console.log("Next page loaded");
+                } catch (err) {
+                    console.log("Next page not loaded");
+                    hasNextPage = false;
+                }
                 // await page.waitForNavigation({ waitUntil: "networkidle2" });
-                // wait for content to have changed
-                await page.waitForSelector("div.shared-item div.contents h2 a", { visible: true, timeout: 5000 }); // wait for the content to load
-                console.log("Next page loaded");
             } else {
                 hasNextPage = false;
             }
 
             // check if we have reached 1000 restaurants
-            if (restaurants.length >= 1300) {
-                hasNextPage = false;
-            }
+            // if (restaurants.length >= 1900) {
+            //     hasNextPage = false;
+            // }
         }
     } catch (err) {
         console.log(err);
+        hasNextPage = false;
     }
 
     await browser.close();
