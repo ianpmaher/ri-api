@@ -34,7 +34,8 @@ app.get("/hello", (req, res, next) => {
 });
 
 app.get("/", (req, res) => {
-    res.send("Hello World!");
+    // serve index.html
+    res.sendFile(path.join(__dirname, "public", "index.html"));
 });
 
 app.listen(PORT, () => {

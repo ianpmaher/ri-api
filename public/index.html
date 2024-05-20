@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>RI API</title>
+        <style>
+            body {
+                font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell,
+                    "Open Sans", "Helvetica Neue", sans-serif;
+                margin: 0;
+                padding: 20px;
+                background: linear-gradient(45deg, #fff 30%, #3df 100%);
+            }
+            h1,
+            h2,
+            h3,
+            h4 {
+                color: #333;
+            }
+            table {
+                width: 100%;
+                border-collapse: collapse;
+                margin-bottom: 20px;
+            }
+            th,
+            td {
+                border: 1px solid #ddd;
+                padding: 8px;
+                text-align: left;
+            }
+            th {
+                background-color: #f2f2f2;
+            }
+            img {
+                max-width: 100%;
+                height: auto;
+                border-radius: 50%;
+            }
+            code {
+                background-color: #f9f9f9;
+                padding: 2px 4px;
+                border-radius: 4px;
+            }
+            .container {
+                max-width: 800px;
+                margin: 0 auto;
+                display: flex;
+                flex-flow: column wrap;
+                text-align: center;
+                justify-content: center;
+                align-items: center;
+            }
+        </style>
+    </head>
+    <body>
+        <section class="container">
+            <h1>RI API</h1>
+            <p>Rhode Island as a Unit of Measurement | Measure any quantity in terms of Rhode Island.</p>
+
+            <!-- <img src="public/newportbridge.webp" alt="Rhode Island Logo" /> -->
+            <a href="https://github.com/ianpmaher/ri-api">
+                <img src="newportbridge.webp" alt="Rhode Island Logo" width="300" height="300" />
+            </a>
+        </section>
+        <h2>API Endpoints</h2>
+
+        <p>
+            Below is a table describing the functionality provided by each API endpoint when accessed via GET requests.
+        </p>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>Endpoint</th>
+                    <th>Functionality</th>
+                    <th>Example Request</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><code>measure/length</code></td>
+                    <td>Converts lengths between different units.</td>
+                    <td><code>/measure/length?from=feet&to=meters&value=10</code></td>
+                </tr>
+                <tr>
+                    <td><code>measure/area</code></td>
+                    <td>Converts areas between different units.</td>
+                    <td><code>/measure/area?area=303&units=sqmi</code></td>
+                </tr>
+                <tr>
+                    <td><code>measure/population</code></td>
+                    <td>Converts areas between different units.</td>
+                    <td><code>/measure/population?population=500000</code></td>
+                </tr>
+                <tr>
+                    <td><code>measure/population-density</code></td>
+                    <td>Converts areas between different units.</td>
+                    <td><code>/measure/population-density?density=300</code></td>
+                </tr>
+                <tr>
+                    <td><code>measure/highest-point</code></td>
+                    <td>Converts areas between different units.</td>
+                    <td><code>/measure/highest-point?height=3000</code></td>
+                </tr>
+                <tr>
+                    <td><code>measure/shoreline</code></td>
+                    <td>Converts areas between different units.</td>
+                    <td><code>/measure/shoreline?shoreline=900</code></td>
+                </tr>
+                <tr>
+                    <td><code>measure/highest-point</code></td>
+                    <td>Converts areas between different units.</td>
+                    <td><code>/measure/area?from=square_km&to=square_mile&value=5</code></td>
+                </tr>
+                <tr>
+                    <td><code>/facts</code></td>
+                    <td>Provides random facts.</td>
+                    <td><code>/facts?type=science</code></td>
+                </tr>
+                <tr>
+                    <td><code>/media/</code></td>
+                    <td>Provides random image sources.</td>
+                    <td><code>/media</code></td>
+                </tr>
+                <tr>
+                    <td><code>/restaurants/</code></td>
+                    <td>Get one random Rhode Island restaurant.</td>
+                    <td><code>/restaurants</code></td>
+                </tr>
+                <tr>
+                    <td><code>/restaurants/all</code></td>
+                    <td>FULL list of Rhode Island restaurants.</td>
+                    <td><code>/restaurants/all</code></td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h3>Endpoint Details</h3>
+
+        <h4>1. <code>measure/length</code></h4>
+        <p>
+            This endpoint allows users to convert lengths from one unit to another. Supported units include meters,
+            kilometers, feet, and miles. Users must specify <code>from</code>, <code>to</code>, and
+            <code>value</code> parameters in the query.
+        </p>
+
+        <h4>2. <code>measure/area</code></h4>
+        <p>
+            This endpoint enables users to convert areas between different measurement units like square meters, square
+            kilometers, acres, and square miles. The <code>from</code>, <code>to</code>, and
+            <code>value</code> parameters need to be provided in the query.
+        </p>
+
+        <h4>3. <code>./facts</code></h4>
+        <p>
+            The facts endpoint provides random facts based on the specified type. Possible types include 'science',
+            'history', and 'math'. The <code>type</code> parameter can be included in the query to specify the category
+            of fact desired.
+        </p>
+
+        <h4>4. <code>./media</code></h4>
+        <p>
+            The media endpoint provides WikiMedia photo URLs based on the search term "Rhode Island". Fetching from
+            WikiMedia each time, not hosted locally.
+        </p>
+
+        <h4>5. <code>./restaurants</code></h4>
+        <p>
+            This endpoint provides a list of restaurants based in Rhode Island. I will add more structure and queries in
+            the future to allow localization. The list is a json file I had scraped using cheerio/puppeteer function
+            found in this repo. The original list from which I scraped is on visitrhodeisland.com.
+        </p>
+
+        <h2>Usage</h2>
+
+        <p>
+            To use these endpoints, make a GET request to the appropriate URL with the necessary query parameters as
+            shown in the examples.
+        </p>
+
+        <h2>Feedback</h2>
+
+        <p>
+            If you have any feedback or issues, please open an issue in this repository, and we will address it as soon
+            as possible.
+        </p>
+
+        <p>Thank you for using our API!</p>
+
+        <h2>Functional deployment:</h2>
+
+        <p>
+            <a href="https://radiant-wildwood-30276-73f4e705b27f.herokuapp.com/"
+                >https://radiant-wildwood-30276-73f4e705b27f.herokuapp.com/</a
+            >
+        </p>
+
+        <h2>Details:</h2>
+        <ul>
+            <li>
+                What is more American than looking at the world in terms of America itself? The Rhode Island API solves
+                a problem few of us have ever considered: how many Rhode Islands would fit into this body of water? How
+                large is this iceberg, in terms of Rhode Islands? How many people live in Indonesia, in units of Rhode
+                Island? (That last one is about 267.)
+            </li>
+            <li>
+                Call to action: developers, take this API and paint the world in terms of Rhode Island, Little Rhodey,
+                the Ocean State.
+            </li>
+            <li>
+                <a href="https://en.wikipedia.org/wiki/List_of_unusual_units_of_measurement#Area"
+                    >https://en.wikipedia.org/wiki/List_of_unusual_units_of_measurement#Area</a
+                >
+            </li>
+        </ul>
+
+        <h2>Technologies used:</h2>
+        <ul>
+            <li>Node</li>
+            <li>Express</li>
+        </ul>
+
+        <h2>Room for Improvement:</h2>
+        <ul>
+            <li>Rewrite with TypeScript</li>
+            <li>Possibly rewrite with Python for Django or FastAPI</li>
+        </ul>
+
+        <h2>Installation</h2>
+        <p>Feel free to clone and fork this repo!</p>
+    </body>
+</html>
