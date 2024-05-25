@@ -8,9 +8,9 @@ router.get("/area", calculateAreaComparison)
 
 router.get("/population", calculatePopulationComparison)
 
-router.get("/highest-point", calculateHighestPointComparison)
-
 router.get("/population-density", calculatePopulationDensityComparison)
+
+router.get("/highest-point", calculateHighestPointComparison)
 
 router.get("/water-to-land", calculateWaterToLandRatioComparison)
 

@@ -11,13 +11,15 @@ Below is a table describing the functionality provided by each API endpoint when
 | ---------------- | ----------------------------------------- | -------------------------------- |
 | `measure/length` | Converts lengths between different units. | `/measure/length?from=feet&to=meters&value=10` |
 | `measure/area`   | Converts areas between different units.   | `/measure/area?area=303&units=sqmi` |
-| `measure/population`   | Converts areas between different units.   | `/measure/population?population=500000` |
+| `measure/population`   | Compares population of other localities to that of R.I.   | `/measure/population?population=500000` |
 | `measure/population-density`   | Converts areas between different units.   | `/measure/population-density?density=300` |
 | `measure/highest-point`   | Converts areas between different units.   | `/measure/highest-point?height=3000` |
 | `measure/shoreline`   | Converts areas between different units.   | `/measure/shoreline?shoreline=900` |
 | `measure/highest-point`   | Converts areas between different units.   | `/measure/area?from=square_km&to=square_mile&value=5` |
-| `/facts`         | Provides random facts.                    | `/facts?type=science`          |
-| `/media/`         | Provides random image srcs.                    | `/media`          |
+| `measure/water-to-land`   | Compares ratio of water (in %) to land versus R.I.'s ratio.   | `/measure/water-to-land?ratio=` |
+| ---------------- | ----------------------------------------- | -------------------------------- |
+| `/facts`         | Provides random facts.                    | `/facts`          |
+| `/media/`         | Provides random image urls.                    | `/media`          |
 | `/restaurants/`         | Get one random Rhode Island restaurant.                    | `/restaurants`          |
 | `/restaurants/all`         | FULL list of Rhode Island restaurants.                    | `/restaurants/all`          |
 
@@ -38,7 +40,7 @@ The media endpoint provides WikiMedia photo URLs based on the search term "Rhode
 #### 5. `./restaurants`
 This endpoint provides a list of restaurants based in Rhode Island. I will add more structure and queries in the future to allow localization. The list is a json file I had scraped using cheerio/puppeteer function found in this repo. The original list from which I scraped is on visitrhodeisland.com .
 
-## Usage
+## Usage 
 
 To use these endpoints, make a GET request to the appropriate URL with the necessary query parameters as shown in the examples.
 

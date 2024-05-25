@@ -27,6 +27,7 @@ const limiter = rateLimit({
     message: "Too many requests from this IP, please try again after 15 minutes.",
 });
 
+// ======================== Rate Limiting ======================== //
 // Apply the rate limiting middleware to all requests
 app.use(limiter);
 

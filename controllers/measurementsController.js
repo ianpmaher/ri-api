@@ -30,7 +30,7 @@ function calculateRILengthComparison(length, rhodeIslandData) {
     // const comparisonPerimeter = (length / rhodeIslandPerimeter).toFixed(4);
     const comparisonLength = (length / rhodeIslandLength).toFixed(4);
     // return comparison;
-    return `The length is ${comparisonLength} times the perimeter of Rhode Island, or ${comparisonLength * 100}%.`;
+    return `The length is ${comparisonLength} times the length of Rhode Island, or ${comparisonLength * 100}%.`;
 }
 
 // === area === //
