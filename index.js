@@ -1,12 +1,13 @@
 const express = require("express");
 const cookieParser = require("cookie-parser");
 const cors = require("cors");
-const path = require("path"); 
-const measurementsRouter = require("./routes/measurementsRouter") // import router
+const path = require("path");
+const measurementsRouter = require("./routes/measurementsRouter"); // import router
 const factsRouter = require("./routes/factsRouter"); // import facts router
 const mediaRouter = require("./routes/mediaRouter");
 const yelpRouter = require("./routes/yelpRouter");
 const restaurantsRouter = require("./routes/restaurantsRouter");
+const rateLimit = require("express-rate-limit");
 const app = express();
 require("dotenv").config();
 
@@ -19,12 +20,22 @@ app.use(cookieParser());
 app.use(cors());
 app.use(express.static("public"));
 
+// Define the rate limit rule
+const limiter = rateLimit({
+    windowMs: 15 * 60 * 1000, // 15 minutes
+    max: 10, // Limit each IP to 100 requests per windowMs
+    message: "Too many requests from this IP, please try again after 15 minutes.",
+});
+
+// Apply the rate limiting middleware to all requests
+app.use(limiter);
+
 // ROUTES
 
 // example usage: http://localhost:3333/measure/length?length=100 // example usage: http://localhost:3333/measure/area?area=100 // example usage: http://localhost:3333/facts
 app.use("/measure", measurementsRouter); // use router for /measure as middleware
 app.use("/facts", factsRouter); // use facts router as middleware
-app.use("/media", mediaRouter);
+app.use("/media", mediaRouter); 
 app.use("/yelp", yelpRouter);
 app.use("/restaurants", restaurantsRouter);
 

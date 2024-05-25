@@ -10,8 +10,8 @@
         <main>
             <div class="container">
 
+                <img id="thing" src="https://http.cat/images/418.jpg" />
             </div>
-            <img id="thing" src="https://http.cat/images/418.jpg" />
         </main>
         <script>
             window.onload = (event) => {
@@ -26,9 +26,12 @@
 
                         })
                         .then((blob) => {
-                            const nestedUrl = blob.imageUrls;
-                            const randomIndex = Math.floor(Math.random() * nestedUrl.length);
+                            // console.log(blob);
+                            const nestedUrl = blob.src;
+                            console.log(nestedUrl)
+                            const randomIndex = Math.floor(Math.random() * 50);
                             const first = nestedUrl[randomIndex];
+                            console.log(picEl.src)
                             picEl.src = first;
                         })
                         .catch((error) => {

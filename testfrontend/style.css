@@ -1,20 +1,74 @@
 /* CSS for making the image responsive */
+html {
+    box-sizing: border-box;
+    font-size: 16px;
+}
+
 body {
-    margin: 0 auto;
-    padding: 0 auto;
-    background-color: #f1f1f1;
+    background-color: cornflowerblue;
     font-family: Arial, sans-serif;
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow-y: scroll;
+    overflow-x: hidden;
+}
+.container {
+    display: flex;
+    border-radius: 10px;
+    justify-content: center;
+    align-items: center;
+    max-height: 50vh;
+    max-width: 50vw;
+    min-width: fit-content;
+    margin: auto; /* Center horizontally and vertically */
+    padding: 1rem;
+    box-shadow: 10px 5px 10px 15px rgba(0, 0, 0, 0.1);
+    -webkit-animation: color-change-5x 10s ease-in-out infinite alternate both;
+    animation: color-change-5x 10s ease-in-out infinite alternate both;
 }
 
 img {
     width: 50%;
     height: 50%;
+    object-fit: contain;
+    display: block; /* Set display to block */
+    margin: 0 auto; /* Center horizontally */
 }
-.container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    max-height: 80vh;
-    max-width: 80vw;
-    margin: 0 auto;
+
+@-webkit-keyframes color-change-5x {
+    0% {
+        background: #19dcea;
+    }
+    25% {
+        background: #b22cff;
+    }
+    50% {
+        background: #ea2222;
+    }
+    75% {
+        background: #f5be10;
+    }
+    100% {
+        background: #3bd80d;
+    }
+}
+@keyframes color-change-5x {
+    0% {
+        background: #19dcea;
+    }
+    25% {
+        background: #b22cff;
+    }
+    50% {
+        background: #ea2222;
+    }
+    75% {
+        background: #f5be10;
+    }
+    100% {
+        background: #3bd80d;
+    }
 }
