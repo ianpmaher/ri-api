@@ -1,8 +1,10 @@
 const express = require("express");
 const router = express.Router();
-const { calculateLengthComparison, calculateAreaComparison, calculatePopulationComparison, calculateHighestPointComparison, calculatePopulationDensityComparison, calculateWaterToLandRatioComparison, calculateShorelineComparison } = require("../controllers/measurementsController");
+const { calculateLengthComparison, calculateAreaComparison, calculatePopulationComparison, calculateHighestPointComparison, calculatePopulationDensityComparison, calculateWaterToLandRatioComparison, calculateShorelineComparison, calculateRIWidthComparison } = require("../controllers/measurementsController");
 
 router.get("/length", calculateLengthComparison)
+
+router.get("/width", calculateRIWidthComparison)
 
 router.get("/area", calculateAreaComparison)
 

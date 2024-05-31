@@ -33,6 +33,13 @@ function calculateRILengthComparison(length, rhodeIslandData) {
     return `The length is ${comparisonLength} times the length of Rhode Island, or ${comparisonLength * 100}%.`;
 }
 
+function calculateRIWidthComparison(width, rhodeIslandData) {
+    const rhodeIslandWidth = rhodeIslandData.width;
+    const comparisonWidth = (width / rhodeIslandWidth).toFixed(4);
+    // return comparison;
+    return `The width is ${comparisonWidth} times the width of Rhode Island, or ${comparisonWidth * 100}%.`;
+}
+
 // === area === //
 
 // convert units
@@ -231,4 +238,5 @@ module.exports = {
     calculatePopulationDensityComparison,
     calculateShorelineComparison,
     calculateWaterToLandRatioComparison,
+    calculateRIWidthComparison,
 };

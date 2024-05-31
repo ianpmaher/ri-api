@@ -9,13 +9,13 @@ Below is a table describing the functionality provided by each API endpoint when
 
 | Endpoint         | Functionality                             | Example Request                  | 
 | ---------------- | ----------------------------------------- | -------------------------------- |
-| `measure/length` | Converts lengths between different units. | `/measure/length?from=feet&to=meters&value=10` |
+| `measure/length` | Compares length between RI and other measures (default = miles). | `/measure/length?length=1000` |
+| `measure/width` | Comapres width (default = miles). | `/measure/width?width=30` |
 | `measure/area`   | Converts areas between different units.   | `/measure/area?area=303&units=sqmi` |
 | `measure/population`   | Compares population of other localities to that of R.I.   | `/measure/population?population=500000` |
-| `measure/population-density`   | Converts areas between different units.   | `/measure/population-density?density=300` |
-| `measure/highest-point`   | Converts areas between different units.   | `/measure/highest-point?height=3000` |
-| `measure/shoreline`   | Converts areas between different units.   | `/measure/shoreline?shoreline=900` |
-| `measure/highest-point`   | Converts areas between different units.   | `/measure/area?from=square_km&to=square_mile&value=5` |
+| `measure/population-density`   | Compares population density.   | `/measure/population-density?density=300` |
+| `measure/highest-point`   | Compares the tallest elevation.   | `/measure/highest-point?height=3000` |
+| `measure/shoreline`   | Comapres RI's shoreline to that of entered quantity.   | `/measure/shoreline?shoreline=900` |
 | `measure/water-to-land`   | Compares ratio of water (in %) to land versus R.I.'s ratio.   | `/measure/water-to-land?ratio=` |
 | ---------------- | ----------------------------------------- | -------------------------------- |
 | `/facts`         | Provides random facts.                    | `/facts`          |
