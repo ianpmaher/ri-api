@@ -7,6 +7,7 @@ const factsRouter = require("./routes/factsRouter"); // import facts router
 const mediaRouter = require("./routes/mediaRouter");
 const yelpRouter = require("./routes/yelpRouter");
 const restaurantsRouter = require("./routes/restaurantsRouter");
+const citiesRouter = require("./routes/citiesRouter");
 const rateLimit = require("express-rate-limit");
 const app = express();
 require("dotenv").config();
@@ -39,6 +40,7 @@ app.use("/facts", factsRouter); // use facts router as middleware
 app.use("/media", mediaRouter); 
 app.use("/yelp", yelpRouter);
 app.use("/restaurants", restaurantsRouter);
+app.use("/cities", citiesRouter);
 
 app.get("/hello", (req, res, next) => {
     res.send("Hello World!");

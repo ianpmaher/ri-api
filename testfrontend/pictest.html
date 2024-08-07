@@ -9,8 +9,17 @@
     <body>
         <main>
             <div class="container">
-
                 <img id="thing" src="https://http.cat/images/418.jpg" />
+                <h1>cities data</h1>
+                <div>
+                    <ul id="cities">
+                        <li class="cities">city 1</li>
+                        <li class="cities">city 2</li>
+                        <li class="cities">city 3</li>
+                        <li class="cities">city 4</li>
+                        <li class="cities">city 5</li>
+                    </ul>
+                </div>
             </div>
         </main>
         <script>
@@ -18,20 +27,22 @@
                 const picEl = document.querySelector("#thing");
                 const fetchPic = () => {
                     fetch("https://radiant-wildwood-30276-73f4e705b27f.herokuapp.com/media")
+                        .catch(() => {
+                            return fetch("http://localhost:3333/media");
+                        })
                         .then((response) => {
                             if (!response.ok) {
                                 throw new Error(`HTTP error status ${response.status}`);
                             }
                             return response.json();
-
                         })
                         .then((blob) => {
                             // console.log(blob);
                             const nestedUrl = blob.src;
-                            console.log(nestedUrl)
+                            console.log(nestedUrl);
                             const randomIndex = Math.floor(Math.random() * 50);
                             const first = nestedUrl[randomIndex];
-                            console.log(picEl.src)
+                            console.log(picEl.src);
                             picEl.src = first;
                         })
                         .catch((error) => {
@@ -41,6 +52,36 @@
                 fetchPic();
 
                 picEl.addEventListener("click", fetchPic);
+            };
+
+            const cities = document.querySelector("#cities");
+
+            const fetchCities = () => {
+                fetch("https://radiant-wildwood-30276-73f4e705b27f.herokuapp.com/cities")
+                    .catch(() => {
+                        console.log("fetching from localhost");
+                        return fetch("http://localhost:3333/cities");
+                    })
+                    .then((response) => {
+                        if (!response.ok) {
+                            throw new Error(`HTTP error status ${response.status}`);
+                        }
+                        console.log(response);
+                        return response.json();
+                    })
+                    .then((data) => {
+                        console.log(data);
+                        data.forEach((city) => {
+                            console.log(city.name);
+                            // const cityEl = document.createElement("li");
+                            // cityEl.textContent = city.name;
+                            // cityEl.classList.add("cities");
+                            // cities.appendChild(cityEl);
+                        });
+                    })
+                    .catch((error) => {
+                        console.error("There has been a problem with your fetch operation:", error);
+                    });
             };
         </script>
     </body>
