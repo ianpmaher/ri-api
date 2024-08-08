@@ -10,20 +10,13 @@
         <main>
             <div class="container">
                 <img id="thing" src="https://http.cat/images/418.jpg" />
-                <h1>cities data</h1>
-                <div>
-                    <ul id="cities">
-                        <li class="cities">city 1</li>
-                        <li class="cities">city 2</li>
-                        <li class="cities">city 3</li>
-                        <li class="cities">city 4</li>
-                        <li class="cities">city 5</li>
-                    </ul>
+                <div class="flex-container">
+                    <h4 class="cities">cities data</h4>
+                    <ol id="cities"></ol>
                 </div>
             </div>
         </main>
         <script>
-            window.onload = (event) => {
                 const picEl = document.querySelector("#thing");
                 const fetchPic = () => {
                     fetch("https://radiant-wildwood-30276-73f4e705b27f.herokuapp.com/media")
@@ -49,19 +42,11 @@
                             console.error("There has been a problem with your fetch operation:", error);
                         });
                 };
-                fetchPic();
-
-                picEl.addEventListener("click", fetchPic);
-            };
 
             const cities = document.querySelector("#cities");
 
             const fetchCities = () => {
-                fetch("https://radiant-wildwood-30276-73f4e705b27f.herokuapp.com/cities")
-                    .catch(() => {
-                        console.log("fetching from localhost");
-                        return fetch("http://localhost:3333/cities");
-                    })
+                fetch("http://localhost:3333/cities")
                     .then((response) => {
                         if (!response.ok) {
                             throw new Error(`HTTP error status ${response.status}`);
@@ -70,18 +55,26 @@
                         return response.json();
                     })
                     .then((data) => {
-                        console.log(data);
                         data.forEach((city) => {
-                            console.log(city.name);
-                            // const cityEl = document.createElement("li");
-                            // cityEl.textContent = city.name;
-                            // cityEl.classList.add("cities");
-                            // cities.appendChild(cityEl);
+                            const cityEl = document.createElement("li");
+                            cityEl.textContent = city["Name"];
+                            if (city["Name"]) {
+                                cityEl.textContent = city["Name"];
+                                cities.appendChild(cityEl);
+                            } else {
+                                cityEl.textContent = "Unknown";
+                            }
+                            cityEl.classList.add("cities");
                         });
                     })
                     .catch((error) => {
                         console.error("There has been a problem with your fetch operation:", error);
                     });
+            };
+            picEl.addEventListener("click", fetchPic);
+            window.onload = (event) => {
+                fetchCities();
+                fetchPic();
             };
         </script>
     </body>

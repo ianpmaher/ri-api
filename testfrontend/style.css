@@ -30,6 +30,24 @@ body {
     animation: color-change-5x 10s ease-in-out infinite alternate both;
 }
 
+.flex-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    border: black 1px solid;
+}
+
+.cities, #cities {
+    margin: 0 auto;
+    padding: 0;
+    /* height: 50vh; */
+    /* width: 100%; */
+}
+
 img {
     width: 50%;
     height: 50%;
