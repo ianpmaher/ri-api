@@ -8,6 +8,7 @@ const mediaRouter = require("./routes/mediaRouter");
 const yelpRouter = require("./routes/yelpRouter");
 const restaurantsRouter = require("./routes/restaurantsRouter");
 const citiesRouter = require("./routes/citiesRouter");
+const historyRouter = require("./routes/historyRouter");
 const rateLimit = require("express-rate-limit");
 const app = express();
 require("dotenv").config();
@@ -41,6 +42,7 @@ app.use("/media", mediaRouter);
 app.use("/yelp", yelpRouter);
 app.use("/restaurants", restaurantsRouter);
 app.use("/cities", citiesRouter);
+app.use("/history", historyRouter);
 
 app.get("/hello", (req, res, next) => {
     res.send("Hello World!");
