@@ -35,33 +35,87 @@
             img {
                 max-width: 100%;
                 height: auto;
-                border-radius: 50%;
             }
             code {
                 background-color: #f9f9f9;
                 padding: 2px 4px;
                 border-radius: 4px;
             }
-            .container {
-                max-width: 800px;
+            .container-flex {
                 margin: 0 auto;
                 display: flex;
                 flex-flow: column wrap;
                 text-align: center;
                 justify-content: center;
                 align-items: center;
+                gap: 2vw;
+            }
+
+            .spin {
+                animation: spin 20s linear infinite;
+                animation-fill-mode: forwards;
+            }
+
+            .reverse-spin {
+                animation: reverse-spin 15s linear infinite;
+                
+            }
+
+            @keyframes spin {
+                0% {
+                    transform: rotate(0deg);
+                }
+                100% {
+                    transform: rotate(360deg);
+                }
+            }
+            @keyframes reverse-spin {
+                0% {
+                    transform: rotate(360deg);
+                }
+                100% {
+                    transform: rotate(0deg);
+                }
             }
         </style>
     </head>
     <body>
-        <section class="container">
-            <h1>RI API</h1>
+        <section class="container-flex">
+            <h1 style="margin: 0">RI API</h1>
             <p>Rhode Island as a Unit of Measurement | Measure any quantity in terms of Rhode Island.</p>
 
-            <!-- <img src="public/newportbridge.webp" alt="Rhode Island Logo" /> -->
-            <a href="https://github.com/ianpmaher/ri-api">
-                <img src="newportbridge.webp" alt="Rhode Island Logo" width="300" height="300" />
-            </a>
+            <div class="container-flex" style="flex-direction: row">
+                <img
+                    src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/7c/Autocrat_Coffee_Syrup_bottles.jpg/1024px-Autocrat_Coffee_Syrup_bottles.jpg"
+                    alt="coffee milk"
+                    class="spin"
+                    width="300"
+                    height="300"
+                    style="border-radius: 20%"
+                    title="coffee milk"
+                />
+
+                <!-- <img src="public/newportbridge.webp" alt="Rhode Island Logo" /> -->
+                <a href="https://github.com/ianpmaher/ri-api">
+                    <img
+                        src="newportbridge.webp"
+                        alt="Rhode Island Logo"
+                        width="300"
+                        height="300"
+                        style="border-radius: 50%"
+                        title="RI API GitHub"
+                    />
+                </a>
+                <img
+                    src="https://upload.wikimedia.org/wikipedia/en/8/88/Del%27s_sign.png"
+                    alt="coffee milk"
+                    class="reverse-spin"
+                    width="300"
+                    height="300"
+                    style="border-radius: 20%"
+                    title="Del's Lemonade"
+                />
+            </div>
         </section>
         <h2>API Endpoints</h2>
 
@@ -69,7 +123,7 @@
             Below is a table describing the functionality provided by each API endpoint when accessed via GET requests.
         </p>
 
-        <table>
+        <table class="max-width: 800px;">
             <thead>
                 <tr>
                     <th>Endpoint</th>
@@ -114,24 +168,34 @@
                     <td><code>/measure/area?from=square_km&to=square_mile&value=5</code></td>
                 </tr>
                 <tr>
-                    <td><code>/facts</code></td>
+                    <td><code>facts/</code></td>
                     <td>Provides random facts.</td>
                     <td><code>/facts?type=science</code></td>
                 </tr>
                 <tr>
-                    <td><code>/media/</code></td>
+                    <td><code>media/</code></td>
                     <td>Provides random image sources.</td>
                     <td><code>/media</code></td>
                 </tr>
                 <tr>
-                    <td><code>/restaurants/</code></td>
+                    <td><code>restaurants/</code></td>
                     <td>Get one random Rhode Island restaurant.</td>
                     <td><code>/restaurants</code></td>
                 </tr>
                 <tr>
-                    <td><code>/restaurants/all</code></td>
+                    <td><code>restaurants/all</code></td>
                     <td>FULL list of Rhode Island restaurants.</td>
                     <td><code>/restaurants/all</code></td>
+                </tr>
+                <tr>
+                    <td><code>history/</code></td>
+                    <td>Provides a list of all historical facts about Rhode Island.</td>
+                    <td><code>/history</code></td>
+                </tr>
+                <tr>
+                    <td><code>history/random</code></td>
+                    <td>Provides a random historical fact about Rhode Island.</td>
+                    <td><code>/history/random</code></td>
                 </tr>
             </tbody>
         </table>
@@ -152,24 +216,33 @@
             <code>value</code> parameters need to be provided in the query.
         </p>
 
-        <h4>3. <code>./facts</code></h4>
+        <h4>3. <code>/facts</code></h4>
         <p>
             The facts endpoint provides random facts based on the specified type. Possible types include 'science',
             'history', and 'math'. The <code>type</code> parameter can be included in the query to specify the category
             of fact desired.
         </p>
 
-        <h4>4. <code>./media</code></h4>
+        <h4>4. <code>/media</code></h4>
         <p>
             The media endpoint provides WikiMedia photo URLs based on the search term "Rhode Island". Fetching from
             WikiMedia each time, not hosted locally.
         </p>
 
-        <h4>5. <code>./restaurants</code></h4>
+        <h4>5. <code>/restaurants</code></h4>
         <p>
             This endpoint provides a list of restaurants based in Rhode Island. I will add more structure and queries in
             the future to allow localization. The list is a json file I had scraped using cheerio/puppeteer function
             found in this repo. The original list from which I scraped is on visitrhodeisland.com.
+        </p>
+
+        <h4>6. <code>/history</code></h4>
+        <p>
+            This endpoint provides a list of historical events critical to Rhode Island history. I largely used the list
+            on this helpful timeline from the Rhode Island Secretary of State website:
+            <a href="https://sos.ri.gov/divisions/archives/ri-history/timeline"
+                >https://sos.ri.gov/divisions/archives/ri-history/timeline</a
+            >
         </p>
 
         <h2>Usage</h2>
