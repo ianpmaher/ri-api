@@ -1,81 +1,81 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>Document</title>
-        <link rel="stylesheet" href="style.css" />
-    </head>
-    <body>
-        <main>
-            <div class="container">
-                <img id="thing" src="https://http.cat/images/418.jpg" />
-                <div class="flex-container">
-                    <h4 class="cities">cities data</h4>
-                    <ol id="cities"></ol>
-                </div>
-            </div>
-        </main>
-        <script>
-                const picEl = document.querySelector("#thing");
-                const fetchPic = () => {
-                    fetch("https://radiant-wildwood-30276-73f4e705b27f.herokuapp.com/media")
-                        .catch(() => {
-                            return fetch("http://localhost:3333/media");
-                        })
-                        .then((response) => {
-                            if (!response.ok) {
-                                throw new Error(`HTTP error status ${response.status}`);
-                            }
-                            return response.json();
-                        })
-                        .then((blob) => {
-                            // console.log(blob);
-                            const nestedUrl = blob.src;
-                            console.log(nestedUrl);
-                            const randomIndex = Math.floor(Math.random() * 50);
-                            const first = nestedUrl[randomIndex];
-                            console.log(picEl.src);
-                            picEl.src = first;
-                        })
-                        .catch((error) => {
-                            console.error("There has been a problem with your fetch operation:", error);
-                        });
-                };
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <main>
+      <div class="container">
+        <img id="thing" src="https://http.cat/images/418.jpg" />
+        <div class="flex-container">
+          <h4 class="cities">cities data</h4>
+          <ol id="cities"></ol>
+        </div>
+      </div>
+    </main>
+    <script>
+      const picEl = document.querySelector("#thing");
+      const fetchPic = () => {
+        fetch("https://radiant-wildwood-30276-73f4e705b27f.herokuapp.com/media")
+          .catch(() => {
+            return fetch("http://localhost:3333/media");
+          })
+          .then((response) => {
+            if (!response.ok) {
+              throw new Error(`HTTP error status ${response.status}`);
+            }
+            return response.json();
+          })
+          .then((blob) => {
+            // console.log(blob);
+            const nestedUrl = blob.src;
+            console.log(nestedUrl);
+            const randomIndex = Math.floor(Math.random() * 50);
+            const first = nestedUrl[randomIndex];
+            console.log(picEl.src);
+            picEl.src = first;
+          })
+          .catch((error) => {
+            console.error("There has been a problem with your fetch operation:", error);
+          });
+      };
 
-            const cities = document.querySelector("#cities");
+      const cities = document.querySelector("#cities");
 
-            const fetchCities = () => {
-                fetch("http://localhost:3333/cities")
-                    .then((response) => {
-                        if (!response.ok) {
-                            throw new Error(`HTTP error status ${response.status}`);
-                        }
-                        console.log(response);
-                        return response.json();
-                    })
-                    .then((data) => {
-                        data.forEach((city) => {
-                            const cityEl = document.createElement("li");
-                            cityEl.textContent = city["Name"];
-                            if (city["Name"]) {
-                                cityEl.textContent = city["Name"];
-                                cities.appendChild(cityEl);
-                            } else {
-                                cityEl.textContent = "Unknown";
-                            }
-                            cityEl.classList.add("cities");
-                        });
-                    })
-                    .catch((error) => {
-                        console.error("There has been a problem with your fetch operation:", error);
-                    });
-            };
-            picEl.addEventListener("click", fetchPic);
-            window.onload = (event) => {
-                fetchCities();
-                fetchPic();
-            };
-        </script>
-    </body>
+      const fetchCities = () => {
+        fetch("http://localhost:3333/cities")
+          .then((response) => {
+            if (!response.ok) {
+              throw new Error(`HTTP error status ${response.status}`);
+            }
+            console.log(response);
+            return response.json();
+          })
+          .then((data) => {
+            data.forEach((city) => {
+              const cityEl = document.createElement("li");
+              cityEl.textContent = city["Name"];
+              if (city["Name"]) {
+                cityEl.textContent = city["Name"];
+                cities.appendChild(cityEl);
+              } else {
+                cityEl.textContent = "Unknown";
+              }
+              cityEl.classList.add("cities");
+            });
+          })
+          .catch((error) => {
+            console.error("There has been a problem with your fetch operation:", error);
+          });
+      };
+      picEl.addEventListener("click", fetchPic);
+      window.onload = (event) => {
+        fetchCities();
+        fetchPic();
+      };
+    </script>
+  </body>
 </html>

@@ -24,9 +24,9 @@ app.use(express.static("public"));
 
 // Define the rate limit rule
 const limiter = rateLimit({
-    windowMs: 5 * 60 * 1000, // 15 minutes
-    max: 100, // Limit each IP to 100 requests per windowMs
-    message: "Too many requests from this IP, please try again after 15 minutes.",
+  windowMs: 5 * 60 * 1000, // 15 minutes
+  max: 100, // Limit each IP to 100 requests per windowMs
+  message: "Too many requests from this IP, please try again after 15 minutes.",
 });
 
 // ======================== Rate Limiting ======================== //
@@ -38,22 +38,22 @@ app.use(limiter);
 // example usage: http://localhost:3333/measure/length?length=100 // example usage: http://localhost:3333/measure/area?area=100 // example usage: http://localhost:3333/facts
 app.use("/measure", measurementsRouter); // use router for /measure as middleware
 app.use("/facts", factsRouter); // use facts router as middleware
-app.use("/media", mediaRouter); 
+app.use("/media", mediaRouter);
 app.use("/yelp", yelpRouter);
 app.use("/restaurants", restaurantsRouter);
 app.use("/cities", citiesRouter);
 app.use("/history", historyRouter);
 
 app.get("/hello", (req, res, next) => {
-    res.send("Hello World!");
-    next();
+  res.send("Hello World!");
+  next();
 });
 
 app.get("/", (req, res) => {
-    // serve index.html
-    res.sendFile(path.join(__dirname, "public", "index.html"));
+  // serve index.html
+  res.sendFile(path.join(__dirname, "public", "index.html"));
 });
 
 app.listen(PORT, () => {
-    console.log(`Example app listening at http://localhost:${PORT}`);
+  console.log(`Example app listening at http://localhost:${PORT}`);
 });

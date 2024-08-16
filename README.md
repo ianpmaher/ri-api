@@ -22,6 +22,8 @@ Below is a table describing the functionality provided by each API endpoint when
 | `/media/`         | Provides random image urls.                    | `/media`          |
 | `/restaurants/`         | Get one random Rhode Island restaurant.                    | `/restaurants`          |
 | `/restaurants/all`         | FULL list of Rhode Island restaurants.                    | `/restaurants/all`          |
+| `/history/`         | FULL list of Rhode Island historical facts.                    | `/history/`          |
+| `/history/random`         | One random historical fact.                    | `/history/random`          |
 
 ### Endpoint Details
 
@@ -39,6 +41,9 @@ The media endpoint provides WikiMedia photo URLs based on the search term "Rhode
 
 #### 5. `./restaurants`
 This endpoint provides a list of restaurants based in Rhode Island. I will add more structure and queries in the future to allow localization. The list is a json file I had scraped using cheerio/puppeteer function found in this repo. The original list from which I scraped is on visitrhodeisland.com .
+
+#### 6. `./history`
+This endpoint provides a list of history facts from Rhode Island. The source is originally from the Rhode Island Secretary of State's website, a timeline. I will add parameters in the future.
 
 ## Usage 
 
@@ -64,7 +69,8 @@ Thank you for using our API!
 # Technologies used:
 * Node 
 * Express
-* 
+* Cheerio
+* Puppeteer
 
 Room for Improvement: 
 * Rewrite with TypeScript
