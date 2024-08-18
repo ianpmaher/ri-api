@@ -24,6 +24,9 @@ Below is a table describing the functionality provided by each API endpoint when
 | `/restaurants/all`         | FULL list of Rhode Island restaurants.                    | `/restaurants/all`          |
 | `/history/`         | FULL list of Rhode Island historical facts.                    | `/history/`          |
 | `/history/random`         | One random historical fact.                    | `/history/random`          |
+| `/people/`         | Get one random Rhode Island famous person.                    | `/people`          |
+| `/people/all`         | FULL list of Rhode Island famous people.                    | `/people/all`          |
+
 
 ### Endpoint Details
 
@@ -44,6 +47,10 @@ This endpoint provides a list of restaurants based in Rhode Island. I will add m
 
 #### 6. `./history`
 This endpoint provides a list of history facts from Rhode Island. The source is originally from the Rhode Island Secretary of State's website, a timeline. I will add parameters in the future.
+
+#### 7. `./people`
+This endpoint provides a list of famous people from Rhode Island. The information contained is largely scraped from the Wikipedia page: <a href="https://en.wikipedia.org/wiki/List_of_people_from_Rhode_Island">https://en.wikipedia.org/wiki/List_of_people_from_Rhode_Island</a> 
+I will add more structure in the future to allow more functionality. The list is a json file I had scraped using cheerio function found in this repo.
 
 ## Usage 
 
